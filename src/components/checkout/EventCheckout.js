@@ -7,7 +7,7 @@ import { faCircle as faCircleSolid, faAngleDown, faAngleUp } from '@fortawesome/
 import {useParams} from "react-router-dom";
 import { Helmet } from 'react-helmet-async';
 
-const stripePromise = loadStripe('pk_test_51P2EORHyPLDppEA76adz3fIqOoQGdHDsIGVmIx6XwrAANIkVvqpAJgAmI46ZdxHkjIiLOhM2WvAtq3R67jpi21Ky00y7J8rRNk'); // Replace with your Stripe publishable key
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY); // Replace with your Stripe publishable key
 
 const EventCheckout = () => {
     const [event, setEvent] = useState(null);
@@ -19,7 +19,7 @@ const EventCheckout = () => {
     const { uuid } = useParams();
 
     useEffect(() => {
-        fetch('http://localhost:3001/events/'+uuid)
+        fetch(process.env.REACT_APP_API_URL+'/events/'+uuid)
             .then(response => response.json())
             .then(data => {
                 setEvent(data);
@@ -27,7 +27,7 @@ const EventCheckout = () => {
             })
             .catch(error => console.error('Error fetching event:', error));
 
-        fetch('http://localhost:3001/prices/event/'+uuid)
+        fetch(process.env.REACT_APP_API_URL+'/prices/event/'+uuid)
             .then(response => response.json())
             .then(data => setPrices(data))
             .catch(error => console.error('Error fetching prices:', error));
@@ -36,7 +36,7 @@ const EventCheckout = () => {
     const handleCheckout = async () => {
         const stripe = await stripePromise;
         try {
-            const response = await fetch('http://localhost:3001/create-checkout-session', {
+            const response = await fetch(process.env.REACT_APP_API_URL+'/checkout/create-checkout-session', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const EventCheckout = () => {
     }
 
     return (
-        <section className="hero is-fullheight is-light">
+        <section className="hero is-fullheight is-white">
             <div className="section">
                 <div className="container has-text-white">
                     <h1 className="title is-1">{event.title}</h1>
@@ -94,7 +94,20 @@ const EventCheckout = () => {
                                     </figure>
                                 </div>
                             </div>
-                            <p style={{ color: 'black' }}>{event.description}</p>
+                            <p style={{ color: 'black' }}>{event.description}</p><br/>
+                            <p style={{ color: 'black' }}>
+
+                                <b>Event Registration Support</b>
+                            </p><br/>
+                            <p><a href="mailto:tickets@qcomputingorientation.ca">tickets@qcomputingorientation.ca</a></p>
+                            <br/>
+                            <p style={{ color: 'black' }}>
+
+                                <b>Accessibility Request</b>
+                            </p><br/>
+                            <p style={{ color: 'black' }}>
+                                We understand that the decision to participate in Fall Orientation can come with the need to request accommodation for accessibility or more information about the activities. Your first step is to complete the <a href="https://www.queensu.ca/orientation/accessibility-request">necessary form</a>.
+                            </p>
                         </div>
                         <div className="column">
                             <div className="notification is-link">
@@ -171,10 +184,15 @@ const EventCheckout = () => {
                             </div>
                         </div>
                     </div>
+                    <br/>
+                    <img src="/Logo.png" width="200px"/>
+
                 </div>
+
             </div>
 
         </section>
+
 
     );
 };

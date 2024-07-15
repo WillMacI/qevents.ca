@@ -1,9 +1,8 @@
 import React from "react";
 
 function Home() {
+    document.title = "QEvents";
     return (
-        <>
-            <title>Test</title>
         <section className="hero is-fullheight" style={{ backgroundColor: 'white'}}>
             <div className="hero-body">
                 <div className="container has-text-centered">
@@ -13,8 +12,6 @@ function Home() {
                 </div>
             </div>
         </section>
-
-        </>
 
     );
 }

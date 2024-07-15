@@ -12,7 +12,7 @@ const Success = () => {
     useEffect(() => {
         const fetchCheckoutInfo = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/checkout-session/${session_id}`);
+                const response = await axios.get(`http://localhost:3001/checkout/checkout-session/${session_id}`);
                 setCheckoutInfo(response.data);
             } catch (error) {
                 console.error('Error fetching checkout info:', error);
@@ -31,11 +31,13 @@ const Success = () => {
         <section className="hero is-fullheight is-white is-fullheight">
             <div className="hero-body">
                 <div className="">
-                    <p>Session ID: {checkoutInfo.sessionId}</p>
                     <img src="/Logo.png" width="20%"/>
                     <br/><br/>
                     <p className="title">Checkout complete! </p>
                     <p className="subtitle">You will receive your ticket and receipt via email soon. </p>
+                    <br/>
+                        <p><small>Session ID: {checkoutInfo.sessionId}</small></p>
+
                 </div>
             </div>
 
