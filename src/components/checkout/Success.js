@@ -12,7 +12,9 @@ const Success = () => {
     useEffect(() => {
         const fetchCheckoutInfo = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/checkout/checkout-session/${session_id}`);
+                const response = await axios.get(`http://localhost:3001/checkout/checkout-session/${session_id}`, {
+                    headers: { 'api-key':process.env.REACT_APP_API_KEY }
+                });
                 setCheckoutInfo(response.data);
             } catch (error) {
                 console.error('Error fetching checkout info:', error);

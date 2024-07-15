@@ -19,7 +19,9 @@ const EventCheckout = () => {
     const { uuid } = useParams();
 
     useEffect(() => {
-        fetch(process.env.REACT_APP_API_URL+'/events/'+uuid)
+        fetch(process.env.REACT_APP_API_URL+'/events/'+uuid, {
+            headers: { 'api-key':process.env.REACT_APP_API_KEY }
+        })
             .then(response => response.json())
             .then(data => {
                 setEvent(data);
@@ -27,7 +29,9 @@ const EventCheckout = () => {
             })
             .catch(error => console.error('Error fetching event:', error));
 
-        fetch(process.env.REACT_APP_API_URL+'/prices/event/'+uuid)
+        fetch(process.env.REACT_APP_API_URL+'/prices/event/'+uuid, {
+            headers: { 'api-key':process.env.REACT_APP_API_KEY }
+        })
             .then(response => response.json())
             .then(data => setPrices(data))
             .catch(error => console.error('Error fetching prices:', error));
@@ -40,6 +44,7 @@ const EventCheckout = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'api-key':process.env.REACT_APP_API_KEY
                 },
                 body: JSON.stringify({
                     priceId: selectedOption,
@@ -103,10 +108,20 @@ const EventCheckout = () => {
                             <br/>
                             <p style={{ color: 'black' }}>
 
+                                <b>Financial Aid</b>
+                            </p><br/>
+                            <p style={{ color: 'black' }}>
+                                Queen's (Faculty) Orientation is fully committed to ensuring our Orientation is as financially
+                                accessible as possible. Assistance is available to students who feel the cost of Orientation
+                                Week registration is a barrier to participation. <a target="_blank" href="https://forms.gle/2V19rU9Fq6QnCiqi7">Learn more here.</a>
+                            </p>
+                            <br/>
+                            <p style={{ color: 'black' }}>
+
                                 <b>Accessibility Request</b>
                             </p><br/>
                             <p style={{ color: 'black' }}>
-                                We understand that the decision to participate in Fall Orientation can come with the need to request accommodation for accessibility or more information about the activities. Your first step is to complete the <a href="https://www.queensu.ca/orientation/accessibility-request">necessary form</a>.
+                                We understand that the decision to participate in Fall Orientation can come with the need to request accommodation for accessibility or more information about the activities. Your first step is to complete the <a target="_blank" href="https://www.queensu.ca/orientation/accessibility-request">necessary form</a>.
                             </p>
                         </div>
                         <div className="column">
