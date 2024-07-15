@@ -20,7 +20,7 @@ const EventCheckout = () => {
 
     useEffect(() => {
         fetch(process.env.REACT_APP_API_URL+'/events/'+uuid, {
-            headers: { 'api-key':'6c405192-376c-4b42-bbd9-6233109e05b9' }
+            headers: { 'token':'6c405192-376c-4b42-bbd9-6233109e05b9' }
         })
             .then(response => response.json())
             .then(data => {
@@ -30,7 +30,7 @@ const EventCheckout = () => {
             .catch(error => console.error('Error fetching event:', error));
 
         fetch(process.env.REACT_APP_API_URL+'/prices/event/'+uuid, {
-            headers: { 'api-key':'6c405192-376c-4b42-bbd9-6233109e05b9' }
+            headers: { 'token':'6c405192-376c-4b42-bbd9-6233109e05b9' }
         })
             .then(response => response.json())
             .then(data => setPrices(data))
@@ -44,7 +44,7 @@ const EventCheckout = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'api-key':'6c405192-376c-4b42-bbd9-6233109e05b9'
+                    'token':'6c405192-376c-4b42-bbd9-6233109e05b9'
                 },
                 body: JSON.stringify({
                     priceId: selectedOption,
