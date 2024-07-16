@@ -12,8 +12,8 @@ const Success = () => {
     useEffect(() => {
         const fetchCheckoutInfo = async () => {
             try {
-                const response = await axios.get(process.env.REACT_APP_API_URL+'/checkout/checkout-session/${session_id}', {
-                    headers: { 'authorization':'6c405192-376c-4b42-bbd9-6233109e05b9' }
+                const response = await axios.get(process.env.REACT_APP_API_URL+'/checkout/checkout-session/'+session_id, {
+                    headers: { 'authorization':process.env.REACT_APP_API_KEY }
                 });
                 setCheckoutInfo(response.data);
             } catch (error) {
