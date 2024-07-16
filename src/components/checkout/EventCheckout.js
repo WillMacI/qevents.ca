@@ -19,8 +19,8 @@ const EventCheckout = () => {
     const { uuid } = useParams();
 
     useEffect(() => {
-        fetch(process.env.REACT_APP_API_URL+'/events/'+uuid, {
-            headers: { 'authorization':process.env.REACT_APP_API_KEY }
+        fetch(`${process.env.REACT_APP_API_URL}/events/${uuid}`, {
+            headers: { 'authorization':`${process.env.REACT_APP_API_KEY}` }
         })
             .then(response => response.json())
             .then(data => {
@@ -30,7 +30,7 @@ const EventCheckout = () => {
             .catch(error => console.error('Error fetching event:', error));
 
         fetch(process.env.REACT_APP_API_URL+'/prices/event/'+uuid, {
-            headers: { 'authorization':process.env.REACT_APP_API_KEY }
+            headers: { 'authorization':`${process.env.REACT_APP_API_KEY}` }
         })
             .then(response => response.json())
             .then(data => setPrices(data))
@@ -40,11 +40,11 @@ const EventCheckout = () => {
     const handleCheckout = async () => {
         const stripe = await stripePromise;
         try {
-            const response = await fetch(process.env.REACT_APP_API_URL+'/checkout/create-checkout-session', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/checkout/create-checkout-session`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'authorization':process.env.REACT_APP_API_KEY
+                    'authorization':`${process.env.REACT_APP_API_KEY}`
                 },
                 body: JSON.stringify({
                     priceId: selectedOption,
