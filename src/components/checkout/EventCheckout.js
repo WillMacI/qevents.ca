@@ -19,6 +19,7 @@ const EventCheckout = () => {
     const { uuid } = useParams();
 
     useEffect(() => {
+        console.log(`${process.env.REACT_APP_API_URL}/events/${uuid}`)
         fetch(`${process.env.REACT_APP_API_URL}/events/${uuid}`, {
             headers: { 'authorization':`${process.env.REACT_APP_API_KEY}` }
         })
