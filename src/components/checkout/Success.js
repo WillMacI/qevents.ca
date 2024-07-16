@@ -19,7 +19,7 @@ const Success = () => {
             }
 
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/checkout/checkout-session/${session_id}`, {
+                const response = await axios.get(`https://api.qevents.ca/checkout/checkout-session/${session_id}`, {
                     headers: { 'authorization': process.env.REACT_APP_API_KEY }
                 });
                 setCheckoutInfo(response.data);
