@@ -13,7 +13,7 @@ const Success = () => {
         const fetchCheckoutInfo = async () => {
             try {
                 const response = await axios.get(process.env.REACT_APP_API_URL+'/checkout/checkout-session/${session_id}', {
-                    headers: { 'token':'6c405192-376c-4b42-bbd9-6233109e05b9' }
+                    headers: { 'authorization':'6c405192-376c-4b42-bbd9-6233109e05b9' }
                 });
                 setCheckoutInfo(response.data);
             } catch (error) {
