@@ -7,7 +7,7 @@ import { faCircle as faCircleSolid, faAngleDown, faAngleUp } from '@fortawesome/
 import {useParams} from "react-router-dom";
 import { Helmet } from 'react-helmet-async';
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY); // Replace with your Stripe publishable key
+const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`); // Replace with your Stripe publishable key
 
 const EventCheckout = () => {
     const [event, setEvent] = useState(null);
