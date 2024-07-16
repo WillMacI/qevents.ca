@@ -6,13 +6,18 @@ import axios from 'axios'; // Use Axios or fetch API for making HTTP requests
 const Success = () => {
     const [checkoutInfo, setCheckoutInfo] = useState(null);
     const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const session_id = searchParams.get('session_id');
+    const [session_id, setSessionId] = useState(null);
+
 
     console.log('Session ID:', session_id);
 
     useEffect(() => {
+
+
         const fetchCheckoutInfo = async () => {
+            const params = new URLSearchParams(location.search);
+            const session_id = params.get('session_id');
+            setSessionId(session_id);
             if (!session_id) {
                 console.error('Session ID is null or undefined');
                 return;
