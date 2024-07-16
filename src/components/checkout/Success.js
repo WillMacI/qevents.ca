@@ -12,7 +12,7 @@ const Success = () => {
     useEffect(() => {
         const fetchCheckoutInfo = async () => {
             try {
-                const response = await axios.get(process.env.REACT_APP_API_URL+'/checkout/checkout-session/'+searchParams.get('session_id'), {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/checkout/checkout-session/${session_id}`, {
                     headers: { 'authorization':process.env.REACT_APP_API_KEY }
                 });
                 setCheckoutInfo(response.data);
