@@ -4,45 +4,6 @@ import { useLocation } from 'react-router-dom'; // Assuming you use React Router
 import axios from 'axios'; // Use Axios or fetch API for making HTTP requests
 
 const Success = () => {
-    const [checkoutInfo, setCheckoutInfo] = useState(null);
-    const location = useLocation();
-    const [session_id, setSessionId] = useState(null);
-
-
-    console.log('Session ID:', session_id);
-
-    useEffect(() => {
-
-
-        const fetchCheckoutInfo = async () => {
-            const params = new URLSearchParams(location.search);
-            const session_id = params.get('session_id');
-            setSessionId(session_id);
-            if (!session_id) {
-                console.error('Session ID is null or undefined');
-                return;
-            }
-
-            // Construct the URL using one of the methods above
-            const url = process.env.REACT_APP_API_URL + '/checkout/checkout-session/' + session_id;
-
-            try {
-                const response = await axios.get(url, {
-                    headers: { 'authorization': process.env.REACT_APP_API_KEY }
-                });
-                setCheckoutInfo(response.data);
-            } catch (error) {
-                console.error('Error fetching checkout info:', error);
-                // Handle error (e.g., show error message)
-            }
-        };
-
-        fetchCheckoutInfo();
-    }, [session_id]);
-
-    if (!checkoutInfo) {
-        return <div>Loading...</div>;
-    }
 
     return (
         <section className="hero is-fullheight is-white is-fullheight">
@@ -53,8 +14,6 @@ const Success = () => {
                     <p className="title">Checkout complete! </p>
                     <p className="subtitle">You will receive your ticket and receipt via email soon. </p>
                     <br/>
-                    <p><small>Session ID: {checkoutInfo.sessionId}</small></p>
-
                 </div>
             </div>
         </section>
