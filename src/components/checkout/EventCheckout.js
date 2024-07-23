@@ -16,7 +16,7 @@ const EventCheckout = () => {
     const [toggledDescription, setToggledDescription] = useState(null);
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
-    const { uuid } = useParams();
+    const uuid = "56ae461c-231e-4f1e-961f-12b0cf370fe7";
 
     useEffect(() => {
         console.log(`${process.env.REACT_APP_API_URL}/events/${uuid}`)
